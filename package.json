@@ -11,11 +11,13 @@
     "build": "tsc && node -e \"if (process.platform !== 'win32') require('fs').chmodSync('dist/index.js', 0o755)\"",
     "watch": "tsc --watch",
     "dev": "npm run build && node dist/index.js",
-    "start": "node dist/index.js",
+    "start": "node dist/server.js --http",
     "start:http": "node dist/server.js --http",
     "start:stdio": "node dist/server.js",
     "test": "echo \"Tests will be added later\" && exit 0",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "render-build": "npm ci && npm run build",
+    "render-start": "node dist/server.js --http"
   },
   "keywords": [
     "mcp",
