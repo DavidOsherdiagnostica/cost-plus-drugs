@@ -7,10 +7,11 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { isInitializeRequest } from "@modelcontextprotocol/sdk/types.js";
 import { MCP_SERVER_CONFIG } from "./config/appConfig.js";
 
-// Import our generic tool and prompt registrations
-import { registerTemplatePrompt } from "./prompts/templatePrompt.js";
-import { registerTemplateTool } from "./tools/templateTool.js";
-import { registerTemplateResource } from "./resources/templateResource.js";
+// Import Cost Plus Drugs tool and resource registrations
+import { registerSearchMedicinesTool } from "./tools/searchMedicinesTool.js";
+import { registerGetCollectionsTool } from "./tools/getCollectionsTool.js";
+import { registerGetAllProductsTool } from "./tools/getAllProductsTool.js";
+import { registerCostPlusDrugsCollectionsResource } from "./resources/costPlusDrugsCollectionsResource.js";
 
 // Function to create and configure an MCP server instance
 function createServer() {
@@ -19,18 +20,16 @@ function createServer() {
         version: MCP_SERVER_CONFIG.SERVER_VERSION
     });
 
-    // Register generic prompts, tools, and resources
-    registerTemplatePrompt(server);
-    registerTemplateTool(server);
-    registerTemplateResource(server); // Register the generic resource
+    // Register Cost Plus Drugs tools and resources
+    registerSearchMedicinesTool(server);
+    registerGetCollectionsTool(server);
+    registerGetAllProductsTool(server);
+    registerCostPlusDrugsCollectionsResource(server);
 
-    // TODO: Add your specific tool and prompt registrations here
-    // import { registerYourCustomTool } from "./tools/yourCustomTool.js";
-    // registerYourCustomTool(server);
-
-    // TODO: Add your specific resource registrations here
-    // import { registerYourCustomResource } from "./resources/yourCustomResource.js";
-    // registerYourCustomResource(server);
+    // All template files removed - using only Cost Plus Drugs specific tools and resources
+    // TODO: Add additional Cost Plus Drugs tools and resources here as needed
+    // import { registerYourCustomCostPlusDrugsTool } from "./tools/yourCustomCostPlusDrugsTool.js";
+    // registerYourCustomCostPlusDrugsTool(server);
 
     return server;
 }

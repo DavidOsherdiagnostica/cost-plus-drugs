@@ -29,39 +29,45 @@ export class GenericResponseFormatterService {
     const startTime = Date.now();
     const queryTime = queryStartTime ? Date.now() - queryStartTime : Date.now() - startTime;
 
-    // Default generic metadata, notes, warnings, and next actions
-    const genericMetadata = {
+    // Cost Plus Drugs specific metadata, notes, warnings, and next actions
+    const costPlusMetadata = {
       total_results: Array.isArray(processedData) ? processedData.length : 1,
       query_time: `${queryTime}ms`,
       data_source: APP_CONFIG.DEFAULT_DATA_SOURCE,
       last_updated: new Date().toISOString(),
       api_version: APP_CONFIG.API_VERSION,
-      // Add other generic metadata fields as needed
+      disclaimer: 'Medication information provided for informational purposes only. Always consult healthcare professionals for medical advice.',
+      // Add other Cost Plus Drugs specific metadata fields as needed
     };
 
-    const genericClinicalNotes = [
-      'Generic response generated for the tool.',
-      'Review data carefully for relevance to your query.',
+    const costPlusClinicalNotes = [
+      'Cost Plus Drugs provides affordable medications with transparent pricing.',
+      'All medications are FDA-approved and sourced from licensed manufacturers.',
+      'Prices shown are current as of the query time and may change.',
     ];
 
-    const genericWarnings: string[] = []; // Tools can add specific warnings
-    const genericNextActions: Array<{ tool: string; reason: string; parameters_hint: string }> = [
-      // Example generic next action
+    const costPlusWarnings: string[] = []; // Tools can add specific warnings
+    const costPlusNextActions: Array<{ tool: string; reason: string; parameters_hint: string }> = [
       {
-        tool: 'template_tool',
-        reason: 'Explore further using the template tool for detailed analysis',
-        parameters_hint: 'Use specific parameters based on the current output',
+        tool: 'search_medicines',
+        reason: 'Search for other medications by name or active ingredient',
+        parameters_hint: 'query: [medication name]',
+      },
+      {
+        tool: 'get_collections',
+        reason: 'Browse medication categories to find related treatments',
+        parameters_hint: 'No parameters needed',
       },
     ];
 
     return createMcpSuccessResponse(processedData, {
-      totalResults: genericMetadata.total_results,
+      totalResults: costPlusMetadata.total_results,
       queryTime: queryTime,
       additionalInfo: {
-        ...genericMetadata,
-        notes: genericClinicalNotes,
-        warnings: genericWarnings,
-        next_actions: genericNextActions,
+        ...costPlusMetadata,
+        notes: costPlusClinicalNotes,
+        warnings: costPlusWarnings,
+        next_actions: costPlusNextActions,
       },
     });
   }

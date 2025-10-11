@@ -2,6 +2,14 @@ import fetch from 'node-fetch';
 import { GenericError, ErrorType, ErrorSeverity } from '../types/errors.js';
 import { APP_CONFIG, REQUEST_CONFIG } from '../config/appConfig.js';
 import { classifyError, logError } from '../utils/errorHandler.js';
+import type {
+  SearchMedicinesVariables,
+  GetCollectionPathsVariables,
+  GetAllProductsVariables,
+  SearchMedicinesResponse,
+  GetCollectionPathsResponse,
+  GetAllProductsResponse
+} from '../types/api.js';
 
 // ===== API CLIENT CLASS =====
 
@@ -84,20 +92,144 @@ export class GenericApiClient {
   }
 
   /**
-   * Perform a generic API call to a specified endpoint with a given request body.
-   * This function should be used by individual tools to interact with your specific API.
+   * Perform a GraphQL API call to Cost Plus Drugs API.
    *
-   * @param endpoint The API endpoint to call.
-   * @param requestBody The request body to send (type U).
+   * @param query The GraphQL query string.
+   * @param variables The variables for the GraphQL query.
    * @returns A promise that resolves to the API response (type T).
    */
-  async performGenericApiCall<T, U>(endpoint: string, requestBody: U): Promise<T> {
-    // Implement your API specific logic here. This is a placeholder.
-    // You might need to map requestBody (U) to your API's expected format
-    // and then call this.makeRequest<T>(endpoint, mappedBody);
+  async performGraphQLCall<T>(query: string, variables: Record<string, unknown> = {}): Promise<T> {
+    const endpoint = '/graphql/';
+    const requestBody = {
+      query,
+      variables
+    };
 
-    // For example, if your API always expects a 'data' field:
-    return this.makeRequest<T>(endpoint, { ...requestBody as Record<string, unknown> });
+    return this.makeRequest<T>(endpoint, requestBody);
+  }
+
+  /**
+   * Search for medications by name or search term.
+   */
+  async searchMedicines(variables: SearchMedicinesVariables): Promise<SearchMedicinesResponse> {
+    const query = `
+      query SearchMedicines($medicationSearch: String) {
+        products(
+          channel: "default-channel"
+          first: 1000
+          medicationSearch: $medicationSearch
+        ) {
+          edges {
+            node {
+              id
+              name
+              slug
+              collections {
+                name
+                slug
+                __typename
+              }
+              priceCalculation
+              retailPrice
+              variants {
+                id
+                sku
+                metafields(keys: [
+                  "retailPricePerUnit","form","slug","sku","package_size",
+                  "is_active","insuranceEligible","cashEligible"
+                ])
+                images { url __typename }
+                specialtyMedication
+                __typename
+              }
+              isAvailable
+              metafields(keys: ["brandGeneric","brandName","external_promotion","medication_full_display_name"])
+              __typename
+            }
+            __typename
+          }
+          __typename
+        }
+      }
+    `;
+
+    return this.performGraphQLCall<SearchMedicinesResponse>(query, variables);
+  }
+
+  /**
+   * Get all available collections/categories.
+   */
+  async getCollectionPaths(variables: GetCollectionPathsVariables): Promise<GetCollectionPathsResponse> {
+    const query = `
+      query GetCollectionPaths($search: String) {
+        collections(first: 1000, channel: "default-channel", filter: { search: $search }) {
+          edges {
+            node {
+              id
+              name
+              slug
+              __typename
+            }
+            __typename
+          }
+          __typename
+        }
+      }
+    `;
+
+    return this.performGraphQLCall<GetCollectionPathsResponse>(query, variables);
+  }
+
+  /**
+   * Get products with pagination and filtering.
+   */
+  async getAllProducts(variables: GetAllProductsVariables): Promise<GetAllProductsResponse> {
+    const query = `
+      query GetAllProducts(
+        $before: String, $after: String, $first: Int, $last: Int,
+        $direction: OrderDirection!, $productOrderField: ProductOrderField!, $collection: [ID!]
+      ) {
+        products(
+          first: $first
+          last: $last
+          channel: "default-channel"
+          after: $after
+          before: $before
+          sortBy: { direction: $direction, field: $productOrderField }
+          filter: { collections: $collection }
+        ) {
+          edges {
+            node {
+              id
+              name
+              slug
+              collections { name slug __typename }
+              priceCalculation
+              retailPrice
+              variants {
+                id sku
+                metafields(keys: [
+                  "retailPricePerUnit","form","slug","sku","package_size",
+                  "is_active","insuranceEligible","cashEligible"
+                ])
+                images { url __typename }
+                specialtyMedication
+                __typename
+              }
+              isAvailable
+              metafields(keys: ["brandGeneric","brandName","external_promotion","medication_full_display_name"])
+              __typename
+            }
+            __typename
+          }
+          totalCount
+          pageInfo { startCursor endCursor hasNextPage hasPreviousPage __typename }
+          __typename
+        }
+      }
+    `;
+
+    return this.performGraphQLCall<GetAllProductsResponse>(query, variables);
   }
 
   // ===== UTILITY METHODS =====
@@ -132,8 +264,7 @@ export class GenericApiClient {
   // ===== HEALTH CHECK =====
 
   /**
-   * Performs a generic health check on the API.
-   * You should customize this to ping a reliable endpoint of your integrated API.
+   * Performs a health check on the Cost Plus Drugs API.
    */
   async healthCheck(): Promise<{
     status: 'healthy' | 'degraded' | 'unhealthy';
@@ -144,11 +275,13 @@ export class GenericApiClient {
     const endpointResults: Record<string, boolean> = {};
 
     try {
-      // Replace with an actual lightweight endpoint from your integrated API
-      // Example: await this.makeRequest('/health', {});
-      endpointResults.generic_endpoint_check = true; 
+      // Test the GraphQL endpoint with a simple query
+      await this.performGraphQLCall('/graphql/', {
+        query: 'query { __typename }'
+      });
+      endpointResults.graphql_endpoint = true;
     } catch {
-      endpointResults.generic_endpoint_check = false;
+      endpointResults.graphql_endpoint = false;
     }
 
     const latency = Date.now() - startTime;

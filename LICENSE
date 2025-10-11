@@ -1,6 +1,6 @@
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 
-Israel Drugs MCP Server License
+ Cost Plus Drugs MCP Server License
 
 Copyright (c) 2025 David Osher
 
@@ -22,7 +22,7 @@ Under the following terms:
 Attribution
 You must give appropriate credit to David Osher, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
 
-NonCommercial  
+NonCommercial
 You may not use the material for commercial purposes without explicit written permission from the copyright holder.
 
 ShareAlike
@@ -51,6 +51,7 @@ Commercial use includes, but is not limited to:
 - Using the software to generate revenue
 - Integrating the software into commercial healthcare platforms
 - Offering the software as a service (SaaS)
+- Using the software for commercial pharmaceutical or healthcare applications
 
 To request commercial licensing, please contact:
 - LinkedIn: [David Osher](https://linkedin.com/in/david-osher)
@@ -60,12 +61,13 @@ To request commercial licensing, please contact:
 
 Medical Disclaimer
 
-IMPORTANT: This software is provided for **educational and informational purposes only. It is **NOT intended for medical diagnosis, treatment, or clinical decision-making**. 
+IMPORTANT: This software is provided for **educational and informational purposes only. It is **NOT intended for medical diagnosis, treatment, or clinical decision-making**.
 
 - Always consult qualified healthcare professionals for medical advice
-- Verify all medication information with official sources
+- Verify all medication information with official sources and current prescribing information
 - This software is not a substitute for professional medical judgment
 - The authors assume no responsibility for medical decisions based on this software
+- Medication information may change and should always be verified with current sources
 
 ---
 
@@ -75,22 +77,19 @@ When sharing or adapting this work, please include attribution similar to:
 
 For Code Attribution:
 
-Based on "Israel Drugs MCP Server" by David Osher
+Based on "Cost Plus Drugs MCP Server" by David Osher
 Licensed under CC BY-NC-SA 4.0
-Original: https://github.com/DavidOsherProceed/israel-drugs-mcp-server
-
+Original: https://github.com/your-username/cost-plus-drugs-mcp-server
 
 For Academic Citation:
 
-Osher, D. (2025). Israel Drugs MCP Server: AI-Powered Access to Israeli Pharmaceutical Database. 
-GitHub. https://github.com/DavidOsherProceed/israel-drugs-mcp-server
-
+Osher, D. (2025). Cost Plus Drugs MCP Server: AI-Powered Access to Affordable Medication Pricing.
+GitHub. https://github.com/your-username/cost-plus-drugs-mcp-server
 
 For General Attribution:
 
-Israel Drugs MCP Server by David Osher is licensed under 
+Cost Plus Drugs MCP Server by David Osher is licensed under
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International.
-
 
 ---
 
@@ -101,4 +100,4 @@ https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 
 ---
 
-This license ensures that the Israel Drugs MCP Server remains freely available for personal, educational, and research use while protecting the rights of the creator and maintaining the open-source spirit of the project.
+This license ensures that the Cost Plus Drugs MCP Server remains freely available for personal, educational, and research use while protecting the rights of the creator and maintaining the open-source spirit of the project.

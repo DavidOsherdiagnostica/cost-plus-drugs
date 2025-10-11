@@ -1,11 +1,11 @@
 {
-  "name": "generic-mcp-server-template",
+  "name": "cost-plus-drugs-mcp-server",
   "version": "1.0.0",
-  "description": "A generic template for a Model Context Protocol (MCP) server, providing a robust and extensible foundation for AI agent integrations.",
+  "description": "A Model Context Protocol (MCP) server for accessing Cost Plus Drugs pharmacy services, providing affordable medication search and transparent pricing for AI agents.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "generic-mcp-server-template": "dist/index.js"
+    "cost-plus-drugs-mcp-server": "dist/index.js"
   },
   "scripts": {
     "build": "tsc && node -e \"if (process.platform !== 'win32') require('fs').chmodSync('dist/index.js', 0o755)\"",
@@ -20,7 +20,10 @@
   "keywords": [
     "mcp",
     "model-context-protocol",
-    "template",
+    "cost-plus-drugs",
+    "pharmacy",
+    "medication",
+    "healthcare",
     "ai-agent",
     "claude",
     "anthropic",
@@ -30,11 +33,11 @@
   "license": "CC-BY-NC-SA-4.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/generic-mcp-server-template.git"
+    "url": "https://github.com/your-username/cost-plus-drugs-mcp-server.git"
   },
-  "homepage": "https://github.com/your-username/generic-mcp-server-template#readme",
+  "homepage": "https://github.com/your-username/cost-plus-drugs-mcp-server#readme",
   "bugs": {
-    "url": "https://github.com/your-username/generic-mcp-server-template/issues"
+    "url": "https://github.com/your-username/cost-plus-drugs-mcp-server/issues"
   },
   "files": [
     "dist/**/*",

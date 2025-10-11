@@ -6,9 +6,9 @@
 
 // ===== API CONFIGURATION =====
 export const APP_CONFIG = {
-  API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:3000/api', // Placeholder for your API base URL
+  API_BASE_URL: process.env.API_BASE_URL || 'https://www.costplusdrugs.com', // Cost Plus Drugs GraphQL API
   API_VERSION: process.env.API_VERSION || '1.0.0',
-  DEFAULT_DATA_SOURCE: 'generic_api_source', // Default source for response metadata
+  DEFAULT_DATA_SOURCE: 'cost_plus_drugs_api', // Default source for response metadata
 } as const;
 
 // ===== REQUEST CONFIGURATION =====
@@ -19,9 +19,10 @@ export const REQUEST_CONFIG = {
 
   HEADERS: {
     'Content-Type': 'application/json',
-    Accept: 'application/json',
-    'User-Agent': 'Generic-MCP-Server/1.0.0', // Customize your User-Agent
-    // Add any other default headers required by your API
+    'Accept': '*/*',
+    'User-Agent': 'PostmanRuntime/7.48.0',
+    'Accept-Encoding': 'gzip, deflate',
+    'Cache-Control': 'no-cache',
   },
 } as const;
 
@@ -34,7 +35,7 @@ export const CACHE_CONFIG = {
 
 // ===== MCP SERVER CONFIGURATION =====
 export const MCP_SERVER_CONFIG = {
-  SERVER_NAME: process.env.MCP_SERVER_NAME || 'generic-mcp-server',
+  SERVER_NAME: process.env.MCP_SERVER_NAME || 'cost-plus-drugs-mcp-server',
   SERVER_VERSION: process.env.MCP_SERVER_VERSION || '1.0.0',
 
   CAPABILITIES: {
@@ -59,11 +60,11 @@ export const ERROR_CONFIG = {
   PERMANENT_FAILURE_CODES: [400, 401, 403, 404] as number[], // HTTP status codes that indicate a permanent failure
 
   DEFAULT_ERROR_MESSAGES: {
-    CONNECTION_ERROR: 'Unable to connect to the external API service',
-    TIMEOUT_ERROR: 'Request to external API timed out',
-    RATE_LIMIT_ERROR: 'Too many requests to external API - please wait before trying again',
-    INVALID_RESPONSE: 'Received unexpected or invalid response from external API',
-    NO_RESULTS: 'No results found matching your criteria',
+    CONNECTION_ERROR: 'Unable to connect to Cost Plus Drugs API service',
+    TIMEOUT_ERROR: 'Request to Cost Plus Drugs API timed out',
+    RATE_LIMIT_ERROR: 'Too many requests to Cost Plus Drugs API - please wait before trying again',
+    INVALID_RESPONSE: 'Received unexpected or invalid response from Cost Plus Drugs API',
+    NO_RESULTS: 'No medications found matching your criteria',
     // Add other generic error messages as needed
   },
 } as const;

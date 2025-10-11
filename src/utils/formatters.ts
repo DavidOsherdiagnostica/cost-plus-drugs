@@ -124,21 +124,21 @@ function generateNextActions(
 ): Array<{ tool: string; reason: string; parameters_hint: string }> {
   const actions: Array<{ tool: string; reason: string; parameters_hint: string }> = [];
 
-  // Example: suggest using a generic search tool if results are empty
+  // Example: suggest using search tool if results are empty
   if (data === null || (Array.isArray(data) && data.length === 0)) {
     actions.push({
-      tool: 'generic_search_tool', // Placeholder tool name
-      reason: 'Try a broader or alternative search query',
-      parameters_hint: 'query: "your new search term"',
+      tool: 'search_medicines', // Cost Plus Drugs search tool
+      reason: 'Try a broader or alternative medication search query',
+      parameters_hint: 'query: "your medication name"',
     });
   }
 
   // Example: suggest checking configuration if an error related to it
   if (typeof data === 'object' && data !== null && 'error' in data && typeof data.error === 'object' && data.error !== null && 'type' in data.error && data.error.type === 'CONFIGURATION_ERROR') {
     actions.push({
-      tool: 'check_configuration', // Placeholder tool name
-      reason: 'Review server and API configuration settings',
-      parameters_hint: 'config_file: "src/config/appConfig.ts"',
+      tool: 'get_collections', // Browse available categories as alternative
+      reason: 'Browse medication categories to find what you need',
+      parameters_hint: 'No parameters needed - browse all categories',
     });
   }
 
