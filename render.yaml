@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: cost-plus-drugs-mcp-server
+    runtime: node
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:http
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: API_BASE_URL
+        value: https://www.costplusdrugs.com
+      - key: MCP_SERVER_NAME
+        value: cost-plus-drugs-mcp-server
+      - key: MCP_API_KEY
+        generateValue: true  # Render will generate a secure random value
+    healthCheckPath: /health
+

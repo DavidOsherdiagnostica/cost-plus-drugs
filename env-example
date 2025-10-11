@@ -1,0 +1,38 @@
+# Cost Plus Drugs MCP Server Configuration
+
+# Environment
+NODE_ENV=development
+
+# Server Configuration
+PORT=3000
+MCP_SERVER_NAME=cost-plus-drugs-mcp-server
+MCP_SERVER_VERSION=1.0.0
+
+# API Configuration
+API_BASE_URL=https://www.costplusdrugs.com
+API_TIMEOUT_MS=30000
+API_RETRY_ATTEMPTS=3
+API_RETRY_DELAY_MS=1000
+
+# Authentication (Production Only)
+# Generate a secure API key for production use
+# Leave empty to disable authentication in development
+# Generate with: openssl rand -base64 32
+MCP_API_KEY=
+
+# Logging
+LOG_LEVEL=info
+DEBUG_MODE=false
+VERBOSE_LOGGING=false
+
+# Rate Limiting (Optional)
+RATE_LIMIT_REQUESTS_PER_MINUTE=60
+RATE_LIMIT_BURST_SIZE=10
+
+# Cache Configuration (Optional)
+ENABLE_CACHE=true
+CACHE_TTL_STATIC_HOURS=24
+CACHE_TTL_DYNAMIC_MINUTES=30
+
+# Development/Testing
+MOCK_API_RESPONSES=false

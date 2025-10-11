@@ -33,11 +33,11 @@
   "license": "CC-BY-NC-SA-4.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/cost-plus-drugs-mcp-server.git"
+    "url": "https://github.com/DavidOsherdiagnostica/cost-plus-drugs.git"
   },
-  "homepage": "https://github.com/your-username/cost-plus-drugs-mcp-server#readme",
+  "homepage": "https://github.com/DavidOsherdiagnostica/cost-plus-drugs#readme",
   "bugs": {
-    "url": "https://github.com/your-username/cost-plus-drugs-mcp-server/issues"
+    "url": "https://github.com/DavidOsherdiagnostica/cost-plus-drugs/issues"
   },
   "files": [
     "dist/**/*",
