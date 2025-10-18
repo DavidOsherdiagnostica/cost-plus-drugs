@@ -14,35 +14,21 @@ The Cost Plus Drugs MCP server empowers AI agents with:
 
 ## 🚀 Quick Start
 
-### For ChatGPT Users:
-
-Deploy this MCP server and connect it to ChatGPT:
-
-1. **Deploy to Render** (free tier):
-   - See detailed instructions in [DEPLOYMENT.md](DEPLOYMENT.md)
-   - One-click deploy with `render.yaml`
-   - Server will be live at: `https://YOUR-APP.onrender.com`
-
-2. **Connect to ChatGPT:**
-   - Open ChatGPT Settings → Apps
-   - Add server URL: `https://YOUR-APP.onrender.com/mcp`
-   - Start using Cost Plus Drugs tools!
-
-### For Local Development:
+### For AI Agents & Developers:
 
 1. **Install & Setup:**
    ```bash
-   git clone https://github.com/DavidOsherdiagnostica/cost-plus-drugs.git
-   cd cost-plus-drugs
+   git clone https://github.com/your-username/cost-plus-drugs-mcp-server.git
+   cd cost-plus-drugs-mcp-server
    npm install && npm run build
    ```
 
 2. **Start the Server:**
    ```bash
-   # Stdio mode (for Claude Desktop)
+   # Stdio mode (recommended for AI agents)
    npm start
 
-   # HTTP mode (for ChatGPT/testing)
+   # HTTP mode (port 3000)
    npm run start:http
    ```
 

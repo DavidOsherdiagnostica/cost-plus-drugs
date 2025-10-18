@@ -11,13 +11,11 @@
     "build": "tsc && node -e \"if (process.platform !== 'win32') require('fs').chmodSync('dist/index.js', 0o755)\"",
     "watch": "tsc --watch",
     "dev": "npm run build && node dist/index.js",
-    "start": "node dist/server.js --http",
+    "start": "node dist/index.js",
     "start:http": "node dist/server.js --http",
     "start:stdio": "node dist/server.js",
     "test": "echo \"Tests will be added later\" && exit 0",
-    "prepublishOnly": "npm run build",
-    "render-build": "npm ci && npm run build",
-    "render-start": "node dist/server.js --http"
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "mcp",
@@ -35,11 +33,11 @@
   "license": "CC-BY-NC-SA-4.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DavidOsherdiagnostica/cost-plus-drugs.git"
+    "url": "https://github.com/your-username/cost-plus-drugs-mcp-server.git"
   },
-  "homepage": "https://github.com/DavidOsherdiagnostica/cost-plus-drugs#readme",
+  "homepage": "https://github.com/your-username/cost-plus-drugs-mcp-server#readme",
   "bugs": {
-    "url": "https://github.com/DavidOsherdiagnostica/cost-plus-drugs/issues"
+    "url": "https://github.com/your-username/cost-plus-drugs-mcp-server/issues"
   },
   "files": [
     "dist/**/*",

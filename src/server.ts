@@ -6,7 +6,6 @@ import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { isInitializeRequest } from "@modelcontextprotocol/sdk/types.js";
 import { MCP_SERVER_CONFIG } from "./config/appConfig.js";
-import { authMiddleware } from "./middleware/auth.js";
 
 // Import Cost Plus Drugs tool and resource registrations
 import { registerSearchMedicinesTool } from "./tools/searchMedicinesTool.js";
@@ -50,31 +49,6 @@ export function setupHttpServer(port: number = 3000) {
     }));
     
     app.use(express.json());
-
-    // Apply authentication middleware to all MCP endpoints
-    app.use(authMiddleware);
-
-    // Health check endpoint for monitoring and deployment verification
-    app.get('/health', (_req: express.Request, res: express.Response) => {
-        res.status(200).json({
-            status: 'healthy',
-            service: 'cost-plus-drugs-mcp-server',
-            version: '1.0.0',
-            timestamp: new Date().toISOString()
-        });
-    });
-
-    // Root endpoint with server info
-    app.get('/', (_req: express.Request, res: express.Response) => {
-        res.status(200).json({
-            name: 'Cost Plus Drugs MCP Server',
-            version: '1.0.0',
-            description: 'MCP server providing access to Cost Plus Drugs pharmacy services',
-            mcp_endpoint: '/mcp',
-            health_check: '/health',
-            documentation: 'https://github.com/DavidOsherdiagnostica/cost-plus-drugs'
-        });
-    });
 
     // Handle POST requests for client-to-server communication
     app.post('/mcp', async (req: express.Request, res: express.Response) => {
